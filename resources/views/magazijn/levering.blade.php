@@ -43,14 +43,16 @@
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
                                 <tr class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <th class="px-4 py-2">Naam Product</th>
                                     <th class="px-4 py-2">Datum laatste levering</th>
                                     <th class="px-4 py-2">Aantal</th>
-                                    <th class="px-4 py-2">Verwachte eerstvolgende levering</th>
+                                    <th class="px-4 py-2">Eerstvolgende levering</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 @foreach ($leveringen as $levering)
                                     <tr>
+                                        <td class="px-4 py-2">{{ $product->Naam }}</td>
                                         <td class="px-4 py-2">{{ $levering->DatumLevering->format('d-m-Y') }}</td>
                                         <td class="px-4 py-2">{{ $levering->Aantal }}</td>
                                         <td class="px-4 py-2">{{ $levering->DatumEerstVolgendeLevering?->format('d-m-Y') ?? '-' }}</td>
