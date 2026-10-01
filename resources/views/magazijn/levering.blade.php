@@ -21,23 +21,11 @@
                             }, 4000);
                         </script>
                     @else
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Naam leverancier</div>
-                                <div>{{ $leverancier?->Naam }}</div>
-                            </div>
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Contactpersoon leverancier</div>
-                                <div>{{ $leverancier?->ContactPersoon }}</div>
-                            </div>
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Leveranciernummer</div>
-                                <div>{{ $leverancier?->LeverancierNummer }}</div>
-                            </div>
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Mobiel</div>
-                                <div>{{ $leverancier?->Mobiel }}</div>
-                            </div>
+                        <div class="space-y-1 mb-6">
+                            <p>Naam Leverancier: {{ $leverancier?->Naam }}</p>
+                            <p>Contactpersoon leverancier: {{ $leverancier?->ContactPersoon }}</p>
+                            <p>Leverancier nummer: {{ $leverancier?->LeverancierNummer }}</p>
+                            <p>Mobiel: {{ $leverancier?->Mobiel }}</p>
                         </div>
 
                         <table class="min-w-full divide-y divide-gray-200">
