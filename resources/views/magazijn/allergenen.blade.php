@@ -18,15 +18,9 @@
                             }, 4000);
                         </script>
                     @else
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Naam Product</div>
-                                <div>{{ $product->Naam }}</div>
-                            </div>
-                            <div>
-                                <div class="text-xs font-medium text-gray-500 uppercase">Barcode</div>
-                                <div>{{ $product->Barcode }}</div>
-                            </div>
+                        <div class="space-y-1 mb-6">
+                            <p>Naam: {{ $product->Naam }}</p>
+                            <p>Barcode: {{ $product->Barcode }}</p>
                         </div>
 
                         <table class="min-w-full divide-y divide-gray-200">
