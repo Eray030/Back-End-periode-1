@@ -10,6 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     @if ($geenVoorraad)
+                        <div class="space-y-1 mb-4">
+                            <p>Naam Product: {{ $product->Naam }}</p>
+                            <p>Naam Leverancier: {{ $leverancier?->Naam }}</p>
+                        </div>
+
                         <p>
                             Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende
                             levering is: {{ $eerstvolgendeLevering ? \Illuminate\Support\Carbon::parse($eerstvolgendeLevering)->format('d-m-Y') : 'onbekend' }}

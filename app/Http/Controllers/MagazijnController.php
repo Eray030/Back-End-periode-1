@@ -32,14 +32,16 @@ class MagazijnController extends Controller
         $magazijn = $product->magazijn;
 
         if (! $magazijn || $magazijn->AantalAanwezig === null) {
-            $eerstvolgendeLevering = ProductPerLeverancier::where('ProductId', $product->Id)
+            $laatsteLevering = ProductPerLeverancier::where('ProductId', $product->Id)
+                ->with('leverancier')
                 ->orderByDesc('DatumEerstVolgendeLevering')
-                ->value('DatumEerstVolgendeLevering');
+                ->first();
 
             return view('magazijn.levering', [
                 'product' => $product,
                 'geenVoorraad' => true,
-                'eerstvolgendeLevering' => $eerstvolgendeLevering,
+                'leverancier' => $laatsteLevering?->leverancier,
+                'eerstvolgendeLevering' => $laatsteLevering?->DatumEerstVolgendeLevering,
             ]);
         }
 
