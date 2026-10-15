@@ -23,6 +23,7 @@ class JaminSeeder extends Seeder
             ['Naam' => 'Haribo', 'ContactPersoon' => 'Sven Stalman', 'LeverancierNummer' => 'L1029324748', 'Mobiel' => '06-24383291'],
             ['Naam' => 'Basset', 'ContactPersoon' => 'Joyce Stelterberg', 'LeverancierNummer' => 'L1023845773', 'Mobiel' => '06-48293823'],
             ['Naam' => 'De Bron', 'ContactPersoon' => 'Remco Veenstra', 'LeverancierNummer' => 'L1023857736', 'Mobiel' => '06-34291234'],
+            ['Naam' => 'Quality Street', 'ContactPersoon' => 'Johan Nooij', 'LeverancierNummer' => 'L1029234586', 'Mobiel' => '06-2345845'],
         ];
         foreach ($leveranciers as $leverancier) {
             Leverancier::create($leverancier);
@@ -40,19 +41,19 @@ class JaminSeeder extends Seeder
         }
 
         $producten = [
-            ['Naam' => 'Mintnopjes', 'Barcode' => '8719587231278'],
-            ['Naam' => 'Schoolkrijt', 'Barcode' => '8719587326713'],
-            ['Naam' => 'Honingdrop', 'Barcode' => '8719587327836'],
-            ['Naam' => 'Zure Beren', 'Barcode' => '8719587321441'],
-            ['Naam' => 'Cola Flesjes', 'Barcode' => '8719587321237'],
-            ['Naam' => 'Turtles', 'Barcode' => '8719587322245'],
-            ['Naam' => 'Witte Muizen', 'Barcode' => '8719587328256'],
-            ['Naam' => 'Reuzen Slangen', 'Barcode' => '8719587325641'],
-            ['Naam' => 'Zoute Rijen', 'Barcode' => '8719587322739'],
-            ['Naam' => 'Winegums', 'Barcode' => '8719587327527'],
-            ['Naam' => 'Drop Munten', 'Barcode' => '8719587322345'],
-            ['Naam' => 'Kruis Drop', 'Barcode' => '8719587322265'],
-            ['Naam' => 'Zoute Ruitjes', 'Barcode' => '8719587323256'],
+            ['Naam' => 'Mintnopjes', 'Barcode' => '8719587231278', 'IsActief' => true],
+            ['Naam' => 'Schoolkrijt', 'Barcode' => '8719587326713', 'IsActief' => true],
+            ['Naam' => 'Honingdrop', 'Barcode' => '8719587327836', 'IsActief' => true],
+            ['Naam' => 'Zure Beren', 'Barcode' => '8719587321441', 'IsActief' => true],
+            ['Naam' => 'Cola Flesjes', 'Barcode' => '8719587321237', 'IsActief' => true],
+            ['Naam' => 'Turtles', 'Barcode' => '8719587322245', 'IsActief' => true],
+            ['Naam' => 'Witte Muizen', 'Barcode' => '8719587328256', 'IsActief' => true],
+            ['Naam' => 'Reuzen Slangen', 'Barcode' => '8719587325641', 'IsActief' => true],
+            ['Naam' => 'Zoute Rijen', 'Barcode' => '8719587322739', 'IsActief' => true],
+            ['Naam' => 'Winegums', 'Barcode' => '8719587327527', 'IsActief' => false],
+            ['Naam' => 'Drop Munten', 'Barcode' => '8719587322345', 'IsActief' => true],
+            ['Naam' => 'Kruis Drop', 'Barcode' => '8719587322265', 'IsActief' => true],
+            ['Naam' => 'Zoute Ruitjes', 'Barcode' => '8719587323256', 'IsActief' => true],
         ];
         foreach ($producten as $product) {
             Product::create($product);

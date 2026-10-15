@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LeverancierController;
 use App\Http\Controllers\MagazijnController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/magazijn', [MagazijnController::class, 'index'])->name('magazijn.index');
     Route::get('/magazijn/{product}/levering', [MagazijnController::class, 'leveringInfo'])->name('magazijn.levering');
     Route::get('/magazijn/{product}/allergenen', [MagazijnController::class, 'allergenenInfo'])->name('magazijn.allergenen');
+
+    Route::get('/leveranciers', [LeverancierController::class, 'index'])->name('leverancier.index');
+    Route::get('/leveranciers/{leverancier}/producten', [LeverancierController::class, 'producten'])->name('leverancier.producten');
+    Route::get('/leveranciers/{leverancier}/producten/{product}/levering', [LeverancierController::class, 'createLeveringForm'])->name('leverancier.producten.levering');
+    Route::post('/leveranciers/{leverancier}/producten/{product}/levering', [LeverancierController::class, 'storeLevering'])->name('leverancier.producten.levering.store');
 });
 
 require __DIR__.'/auth.php';
