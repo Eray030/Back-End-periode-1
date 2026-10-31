@@ -7,6 +7,7 @@ use App\Models\Magazijn;
 use App\Models\Product;
 use App\Models\ProductPerLeverancier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class LeverancierController extends Controller
@@ -61,7 +62,7 @@ class LeverancierController extends Controller
     {
         $validated = $request->validate([
             'Aantal' => ['required', 'integer', 'min:1'],
-            'DatumLevering' => ['required', 'date'],
+            'DatumLevering' => ['nullable', 'date'],
             'DatumEerstVolgendeLevering' => ['nullable', 'date'],
         ]);
 
@@ -70,20 +71,22 @@ class LeverancierController extends Controller
                 ->with('error', 'Het product '.$product->Naam.' van de leverancier '.$leverancier->Naam.' wordt niet meer geproduceerd');
         }
 
-        ProductPerLeverancier::create([
-            'LeverancierId' => $leverancier->Id,
-            'ProductId' => $product->Id,
-            'DatumLevering' => $validated['DatumLevering'],
-            'Aantal' => (int) $validated['Aantal'],
-            'DatumEerstVolgendeLevering' => $validated['DatumEerstVolgendeLevering'] ?? null,
-            'IsActief' => true,
-            'Opmerking' => null,
-        ]);
+        DB::transaction(function () use ($leverancier, $product, $validated): void {
+            ProductPerLeverancier::create([
+                'LeverancierId' => $leverancier->Id,
+                'ProductId' => $product->Id,
+                'DatumLevering' => $validated['DatumLevering'] ?? now()->toDateString(),
+                'Aantal' => (int) $validated['Aantal'],
+                'DatumEerstVolgendeLevering' => $validated['DatumEerstVolgendeLevering'] ?? null,
+                'IsActief' => true,
+                'Opmerking' => null,
+            ]);
 
-        $magazijn = Magazijn::firstOrNew(['ProductId' => $product->Id]);
-        $magazijn->VerpakkingsEenheidInKilogram ??= 1;
-        $magazijn->AantalAanwezig = ($magazijn->AantalAanwezig ?? 0) + (int) $validated['Aantal'];
-        $magazijn->save();
+            $magazijn = Magazijn::firstOrNew(['ProductId' => $product->Id]);
+            $magazijn->VerpakkingsEenheidInKilogram ??= 1;
+            $magazijn->AantalAanwezig = ($magazijn->AantalAanwezig ?? 0) + (int) $validated['Aantal'];
+            $magazijn->save();
+        });
 
         return redirect()->route('leverancier.producten', $leverancier)
             ->with('success', 'Levering opgeslagen.');
